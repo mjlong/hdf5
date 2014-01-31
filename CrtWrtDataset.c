@@ -3,33 +3,28 @@
 #define DATASETNAME "IntArray" 
 #define NX     5                      /* dataset dimensions */
 #define NY     6
-#define RANK   2
+#define NZ     4
+#define RANK   3
 
 int
 main (void)
 {
   hid_t       file, dataset;         /* file and dataset handles */
   hid_t       datatype, dataspace;   /* handles */
-  hsize_t     dimsf[2];              /* dataset dimensions */
+  hsize_t     dimsf[RANK];              /* dataset dimensions */
   herr_t      status;                             
-  int         data[NX][NY];          /* data to write */
-  int         i, j;
+  int         data[NX][NY][NZ];          /* data to write */
+  int         i, j, k;
 
   /* 
    * Data  and output buffer initialization. 
    */
   for (j = 0; j < NX; j++) {
-    for (i = 0; i < NY; i++)
-      data[j][i] = i + j;
+    for (i = 0; i < NY; i++){
+      for (k = 0; k < NZ; k++)
+	data[j][i][k] = 100*j + 10*i + k;
+    }
   }     
-  /*
-   * 0 1 2 3 4 5 
-   * 1 2 3 4 5 6
-   * 2 3 4 5 6 7
-   * 3 4 5 6 7 8
-   * 4 5 6 7 8 9
-   */
-
   /*
    * Create a new file using H5F_ACC_TRUNC access,
    * default file creation properties, and default file
@@ -43,6 +38,7 @@ main (void)
    */
   dimsf[0] = NX;
   dimsf[1] = NY;
+  dimsf[2] = NZ;
   dataspace = H5Screate_simple(RANK, dimsf, NULL); 
 
   /* 
