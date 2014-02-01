@@ -30,14 +30,6 @@ Contains
     if(present(vec3).and.present(dname3)) num = num + 1
 
     allocate(dset_data(length,num))
-    !
-    ! Initialize the dset_data array.
-    !
-    DO i = 1, num
-       DO j = 1, length
-          dset_data(j,i) = (i-1)*6 + j
-       END DO
-    END DO
     
     !
     ! Initialize FORTRAN interface.
