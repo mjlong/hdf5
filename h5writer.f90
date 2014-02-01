@@ -10,8 +10,6 @@ Contains
     character(LEN=*), intent(in)      :: dname1
     real(8), dimension(:), intent(in),&
                              optional :: vec2, vec3
-    character(LEN=*), intent(in),& 
-                             optional :: dname2, dname3
     integer                           :: length, num
 !===============================================================================
 !HDF5 API arguments
