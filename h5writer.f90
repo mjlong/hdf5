@@ -4,11 +4,9 @@ module h5writer
   implicit none
 Contains
 
-  subroutine writeh5(filename, dsetname, vec1, vec2, vec3)
+  subroutine writeh5(filename, dsetname, pnt)
     character(LEN=*), intent(in)      :: filename, dsetname
-    real(8), dimension(:), intent(in) :: vec1
-    real(8), dimension(:), intent(in),&
-                             optional :: vec2, vec3
+    real(8), pointer                  :: pnt(:)
     integer                           :: length, num
 !===============================================================================
 !HDF5 API arguments
@@ -21,12 +19,14 @@ Contains
     INTEGER     ::   error ! Error flag
     INTEGER     ::  i, j
 
-    length  = size(vec1)
-    num = 1
-    if(present(vec2)) num = num + 1
-    if(present(vec3)) num = num + 1
+    num     = size(pnt)
+    length  = size(pnt(1))
 
     allocate(dset_data(length,num))
+
+    do i = 1, num
+       dset_data(:,i) = pnt(i)
+    end do
     
     !
     ! Initialize FORTRAN interface.
