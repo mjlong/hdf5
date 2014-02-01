@@ -7,7 +7,6 @@ Contains
   subroutine writeh5(filename, dsetname, vec1, vec2, vec3)
     character(LEN=*), intent(in)      :: filename, dsetname
     real(8), dimension(:), intent(in) :: vec1
-    character(LEN=*), intent(in)      :: dname1
     real(8), dimension(:), intent(in),&
                              optional :: vec2, vec3
     integer                           :: length, num
