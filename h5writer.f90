@@ -4,7 +4,7 @@ module h5writer
   implicit none
 Contains
 
-  subroutine writeh5(filename, dsetname, vec1, dname1, vec2, dname2, vec3, dname3)
+  subroutine writeh5(filename, dsetname, vec1, vec2, vec3)
     character(LEN=*), intent(in)      :: filename, dsetname
     real(8), dimension(:), intent(in) :: vec1
     character(LEN=*), intent(in)      :: dname1
@@ -26,8 +26,8 @@ Contains
 
     length  = size(vec1)
     num = 1
-    if(present(vec2).and.present(dname2)) num = num + 1
-    if(present(vec3).and.present(dname3)) num = num + 1
+    if(present(vec2)) num = num + 1
+    if(present(vec3)) num = num + 1
 
     allocate(dset_data(length,num))
     
