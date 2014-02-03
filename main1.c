@@ -112,7 +112,7 @@ void main(){
   /*
    * Write the data to the dataset using default transfer properties.
    */
-  status = H5Dwrite(dataset, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, data);
+  status = H5Dwrite(dataset, H5T_NATIVE_INT, H5S_ALL, H5S_ALL, H5P_DEFAULT, vec1);
 
   /*
    * Close/release resources.
