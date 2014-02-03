@@ -1,6 +1,6 @@
 #include "hdf5.h"
 
-void writeh5_nx2_t_(char *filename, char *dsetname, double *vec1, int *num_vec, int *length){
+void writeh5_nxm_(char *filename, char *dsetname, double *vec1, int *num_vec, int *length){
 
   hid_t       file, dataset;         /* file and dataset handles */
   hid_t       datatype, dataspace;   /* handles */
