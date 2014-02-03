@@ -1,25 +1,21 @@
 #include "hdf5.h"
+/*
+Author: Jilang Miao <jlmiao@mit.edu>
+Date  : Feb 3, 2014
 
+writeh5_nxm_ writes "num_vec" vectors of length "length" to h5 file "filename"
+the length by num_vec data MUST be allocated continuously like 
+length X num_vec array or
+long vector with size length X num_vec;
+
+allocating "num_vec" vectors with length length will NOT work
+ */
 void writeh5_nxm_(char *filename, char *dsetname, double *vec1, int *num_vec, int *length){
 
   hid_t       file, dataset;         /* file and dataset handles */
   hid_t       datatype, dataspace;   /* handles */
   hsize_t     dimsf[2];              /* dataset dimensions */
   herr_t      status;                             
-  //  double**    data = (double**)malloc(2*sizeof(double*)); /* data to write */
-  int i,j; 
-
-  /* 
-   * Data  and output buffer initialization. 
-  */
-  printf("*((int*)vec1 + length*i + j) address searching:\n");
-  for(i=0;i<*num_vec;i++){
-    for(j=0;j<*length;j++)
-      printf("%3.1f ",*((double*)vec1 + *length*i + j) );
-    printf("\n");
-  }
-  
-
 
 
   /*
