@@ -11,6 +11,7 @@ void main(){
   herr_t      status;                             
   //  int**    data = (int**)malloc(2*sizeof(int*)); /* data to write */
   int *data[2];
+  int datad[2][4];
   /* from experience so far, it seems that 
      int *data[2] is used to let data[0]=vec1
      int (*data)[2] is used to let data[0]=d0[0]
@@ -28,16 +29,11 @@ void main(){
     *(vec1+i)=10+i;
     *(vec2+i)=20+i;
   }
-  data[0] = vec1;
-  data[1] = vec2;
+  *(data-1) = vec1;
+  *(data+0) = vec2;
+  //  *(data+2) = vec2;
 
-  for(i=0;i<2;i++){
-    for(j=0;j<4;j++){
-      printf("%3d ", data[i][j]);
-      data[i][j]=10*i+j;
-    }
-    printf("\n");
-  }
+
   /*
    * Create a new file using H5F_ACC_TRUNC access,
    * default file creation properties, and default file
@@ -49,7 +45,7 @@ void main(){
    * Describe the size of the array and create the data space for fixed
    * size dataset. 
    */
-  dimsf[0] = 2;
+  dimsf[0] = 2;//3;
   dimsf[1] = length;
   dataspace = H5Screate_simple(2, dimsf, NULL); 
 
