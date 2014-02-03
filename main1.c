@@ -11,27 +11,69 @@ void main(){
   herr_t      status;                             
   //  int**    data = (int**)malloc(2*sizeof(int*)); /* data to write */
   int *data[2];
+  int *datat[2];
   int datad[2][4];
   /* from experience so far, it seems that 
      int *data[2] is used to let data[0]=vec1
      int (*data)[2] is used to let data[0]=d0[0]
+     UPDATE: the following is more believable
+     int *data[2] 2 int pointers in an array
+     int (*data)[2] 1 pointer points to a int any[2] array
   */
   char   filename[16]="t2d.h5", dsetname[16]="name";
   int vec1[4];
   int vec2[4];
+  int vec3[4];
+  //int arr1[4][1];
+  //int arr2[4][1];
   int length = 4;
   int i,j;
   /* 
    * Data  and output buffer initialization. 
   */
 
-  for(i=0;i<4;i++){
+  for(i=0;i<length;i++){
     *(vec1+i)=10+i;
     *(vec2+i)=20+i;
+    *(vec3+i)=30+i;
   }
-  *(data-1) = vec1;
-  *(data+0) = vec2;
-  //  *(data+2) = vec2;
+  *(data+0) = (int*)vec1;
+  *(data+1) = (int*)vec2;
+
+
+  /*
+  for(i=0;i<length;i++){
+    *(*(datad+0)+i) = vec1[i];
+    *(*(datad+1)+i) = vec2[i];
+  }
+  */
+  printf("data[i][j] address searching:\n");
+  for(i=0;i<2;i++){
+    for(j=0;j<length;j++)
+      printf("%3d ",data[i][j]);
+    printf("\n");
+  }
+  
+  printf("*((int*)data + length*i + j) address searching:\n");
+  for(i=0;i<4;i++){
+    for(j=0;j<length;j++)
+      printf("%3d ",*((int*)data + length*i + j) );
+    printf("\n");
+  }
+
+
+  *(datat+0) = (int*)vec1 + length;
+  *(datat+1) = (int*)vec1 + length*2;
+  printf("*((int*)datat + length*i + j) address searching:\n");
+  for(i=0;i<2;i++){
+    for(j=0;j<length;j++)
+      printf("%3d ",*((int*)datat + length*i + j) );
+    printf("\n");
+  }
+
+  /* C cannot read data[][] as I hope
+     try send data[][] back to fortran
+  */
 
 
   /*
