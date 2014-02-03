@@ -66,7 +66,7 @@ void main(){
   *(datt+0) = (int*)vec1 + length;
   *(datt+1) = (int*)vec1 + length*2;
   printf("*((int*)datt + length*i + j) address searching:\n");
-  for(i=0;i<2;i++){
+  for(i=0;i<4;i++){
     for(j=0;j<length;j++)
       printf("%3d ",*((int*)datt + length*i + j) );
     printf("\n");
