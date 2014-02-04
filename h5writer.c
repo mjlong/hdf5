@@ -44,7 +44,7 @@ void writeh5_nxm_(char *filename, char *dsetname, double *vec1, int *num_vec, in
    * Create a new dataset within the file using defined dataspace and
    * datatype and default dataset creation properties.
    */
-  dataset = H5Dcreate(file, dsetname, datatype, dataspace, H5P_DEFAULT);
+  dataset = H5Dcreate(file, dsetname, datatype, dataspace, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
 
   /*
    * Write the data to the dataset using default transfer properties.
