@@ -98,6 +98,7 @@ main (void)
      */
     filetype = H5Dget_type (dset);
     ndims = H5Tget_array_dims (filetype, adims);
+    printf("ndims=%d\n",ndims);//ndims: number of dimensions of adims
 
     /*
      * Get dataspace and allocate memory for read buffer.  This is a
@@ -105,7 +106,9 @@ main (void)
      * the dynamic allocation must be done in steps.
      */
     space = H5Dget_space (dset);
-    ndims = H5Sget_simple_extent_dims (space, dims, dims);
+    ndims = H5Sget_simple_extent_dims (space, dims, NULL);
+    //3rd argument hsize_t maxdims[], both NULL and dims work here
+    printf("ndims=%d\n",ndims);//ndims: number of dimensions of adims
 
     /*
      * Allocate array of pointers to two-dimensional arrays (the
@@ -134,7 +137,11 @@ main (void)
             rdata[i][j] = rdata[0][0] + (adims[0] * adims[1] * i) +
                         (adims[1] * j);
     }
-
+    /*
+      This code allocates layer by layer, that enables [i][j][k] address 
+      calculation but requires time to assign addresses to the pointers 
+      as many as number of large array size. 
+    */
     /*
      * Create the memory datatype.
      */
