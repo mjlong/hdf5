@@ -88,7 +88,7 @@ main (void)
    */
   dimsm[0] = NX;
   dimsm[1] = NY;
-  dimsm[2] = NZ ;
+  dimsm[2] = NZ;
   memspace = H5Screate_simple(RANK_OUT,dimsm,NULL);   
 
   /* 
