@@ -20,7 +20,7 @@ void main(){
     vec1[i]=10 + i;
     vec2[i]=20 + i;
   }
-  writeh5_nx2_t_("t2d.h5", "one 2D", (double*)array[0], &nrow, &ncol);
-  writeh5_nx2_t_("t2v.h5", "two 1D", (double*)vec0,     &nrow, &ncol);
+  writeh5_nxm_("t2d.h5", "one 2D", (double*)array[0], &nrow, &ncol);
+  writeh5_nxm_("t2v.h5", "two 1D", (double*)vec0,     &nrow, &ncol);
 
 }
