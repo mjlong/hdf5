@@ -3,7 +3,6 @@ apptype=fortran
 CC=h5cc
 FC=h5fc
 
-
 ifeq ($(apptype),fortran)
   MC=$(FC)
   LFLAGS=
@@ -12,7 +11,6 @@ ifeq ($(apptype),C)
   MC=$(CC)
   LFLAGS=-lgfortran
 endif
-
 
 FFLAGS = -c
 CFLAGS = -c
