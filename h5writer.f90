@@ -1,28 +1,20 @@
 module h5writer
 
-  use HDF5
   implicit none
+
+  interface writeh5
+     module procedure writeh5_1d
+     module procedure writeh5_2d
+     module procedure writeh5_3d
+  end interface writeh5
+
+
 Contains
 
-  subroutine writeh5(filename, dsetname, pnt)
+  subroutine writeh5_2d_t(filename, dsetname, vec1, vec2)
     character(LEN=*), intent(in)      :: filename, dsetname
-    real(8), pointer                  :: pnt(:)
     integer                           :: length, num
-!===============================================================================
-!HDF5 API arguments
-    integer, parameter:: RANK = 2
-    real(8), allocatable              :: dset_data(:,:)
-    INTEGER(HID_T) :: file_id       ! File identifier
-    INTEGER(HID_T) :: dset_id       ! Dataset identifier
-    integer(HID_T) :: dspace_id
-    INTEGER(HSIZE_T), DIMENSION(RANK) :: data_dims
-    INTEGER     ::   error ! Error flag
-    INTEGER     ::  i, j
 
-    num     = size(pnt)
-    length  = size(pnt(1))
-
-    allocate(dset_data(length,num))
 
     do i = 1, num
        dset_data(:,i) = pnt(i)
